@@ -269,7 +269,7 @@ export default function ChatPanel({ mode = 'full' }: { mode?: 'full' | 'widget' 
           </div>
         </div>
         <div className="flex items-center gap-1.5">
-          <nav className="mr-0.5 hidden items-center gap-1.5 sm:flex">
+          <nav className="mr-0.5 flex items-center gap-1 sm:gap-1.5">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
@@ -277,10 +277,11 @@ export default function ChatPanel({ mode = 'full' }: { mode?: 'full' | 'widget' 
                 target="_blank"
                 rel="noopener noreferrer"
                 title={link.zh}
-                className="group inline-flex items-center gap-1 rounded-md border border-[var(--line-soft)] bg-[rgba(255,253,247,0.6)] px-2 py-1.5 text-[11px] font-serif text-ink-soft transition hover:border-[rgba(156,43,33,0.35)] hover:bg-[rgba(156,43,33,0.045)] hover:text-cinnabar"
+                aria-label={isZh ? link.zh : link.en}
+                className="group inline-flex items-center gap-1 rounded-md border border-[var(--line-soft)] bg-[rgba(255,253,247,0.6)] p-1.5 text-[11px] font-serif text-ink-soft transition hover:border-[rgba(156,43,33,0.35)] hover:bg-[rgba(156,43,33,0.045)] hover:text-cinnabar sm:px-2"
               >
                 <span className="text-gold transition group-hover:text-cinnabar">{link.icon}</span>
-                <span className="hidden md:inline">{isZh ? link.zh : link.en}</span>
+                <span className="hidden sm:inline">{isZh ? link.zh : link.en}</span>
               </a>
             ))}
           </nav>
