@@ -74,10 +74,15 @@ export default function ChatPanel({ mode = 'full' }: { mode?: 'full' | 'widget' 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
-  const [isZh, setIsZh] = useState(false);
+  // Chinese is the default locale for this project; only an explicitly
+  // non-Chinese browser (or a manually toggled preference) falls back to English.
+  const [isZh, setIsZh] = useState(true);
 
   useEffect(() => {
-    setIsZh(navigator.language?.startsWith('zh') ?? false);
+    const stored = localStorage.getItem('ai-chat-locale');
+    if (stored === 'en') setIsZh(false);
+    else if (stored === 'zh') setIsZh(true);
+    else setIsZh(navigator.language?.startsWith('zh') ?? true);
   }, []);
   const [conversationId] = useState(() => {
     if (typeof window === 'undefined') return '';

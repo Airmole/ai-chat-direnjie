@@ -54,6 +54,25 @@ Edit `ai-chat-assistant.config.json` in the project root:
 }
 ```
 
+## Character Skill (狄仁杰)
+
+The assistant's persona comes from the SkillHub skill
+[`@indiv-airmole/direnjie`](https://skillhub.cn/skills/indiv-airmole/direnjie) (v1.0.2).
+It is vendored under `skills/direnjie/` so the prompt stays in one auditable place:
+
+```
+skills/direnjie/
+├── SKILL.md                 # persona, worldview, hard rules, boundaries
+├── references/character.md  # biographies, speech style, sample lines
+└── _meta.json               # source metadata (slug / version)
+```
+
+`systemPrompt` in `ai-chat-assistant.config.json` only references those files — update the
+skill from SkillHub first, then re-sync `SKILL.md` / `references/character.md` here.
+
+**Language:** the UI defaults to Chinese (`zh`). A non-Chinese browser locale falls back to
+English, and a manual toggle is persisted in `localStorage` under `ai-chat-locale`.
+
 ## Environment Variables
 
 | Variable | Required | Description |
