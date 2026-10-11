@@ -214,11 +214,11 @@ export default function ChatPanel({ mode = 'full' }: { mode?: 'full' | 'widget' 
                 </linearGradient>
               </defs>
             </svg>
-            <span className="text-sm font-semibold text-gray-900">{isZh ? 'AI 助手' : config.name}</span>
+            <span className="text-sm font-semibold text-gray-900">{isZh ? '狄仁杰' : config.name}</span>
           </div>
         </div>
         <div className="flex items-center gap-1.5">
-          {!isWidget && (
+          {/*!isWidget && (
             <>
               <a
                 href="https://github.com/TencentEdgeOne/AI-Chat-Assistant"
@@ -239,13 +239,13 @@ export default function ChatPanel({ mode = 'full' }: { mode?: 'full' | 'widget' 
                 {isZh ? '部署' : 'Deploy'}
               </a>
             </>
-          )}
-          <button
+          )*/}
+          {/* <button
             onClick={() => setIsZh(z => !z)}
             className="px-2 py-1 text-[10px] rounded-md bg-gray-100 text-gray-500 hover:text-gray-700 transition"
           >
             {isZh ? 'EN' : '中'}
-          </button>
+          </button> */}
           {messages.length > 0 && (
             <button onClick={clearChat} className="p-1.5 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition" title="Clear">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M0.667 13.982H13.334V4.316H9V0.496H5V4.316H0.667V13.982ZM2 12.649V8.982H12V12.649H5V10.316H3.667V12.649H2ZM12 7.649H2V5.649H6.333V1.829H7.667V5.649H12V7.649Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd" fillOpacity="0.7"/></svg>
@@ -260,25 +260,14 @@ export default function ChatPanel({ mode = 'full' }: { mode?: 'full' | 'widget' 
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <div className="mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none">
-                <path d="M15.624 19.1084H12.3555L14.1338 7.04688H14.0654L10.0596 12.999H12.707L12.1963 15.7197H8.64258L6.45605 19.0898H2.52344L12.1963 4.4248H17.6104L15.624 19.1084ZM23.3555 4.41992L21.5371 19.1035H18.1094L19.9277 4.41992H23.3555Z" fill="url(#wg1)" fillOpacity="0.9"/>
-                <path d="M3.82795 3.43848L4.17716 4.38219C4.54277 5.37021 5.32177 6.14921 6.30981 6.51481L7.25355 6.86402L6.30981 7.21323C5.32177 7.57883 4.54277 8.35783 4.17716 9.34586L3.82795 10.2896L3.47874 9.34586C3.11313 8.35783 2.33412 7.57883 1.34609 7.21323L0.402344 6.86402L1.34609 6.51481C2.33412 6.14921 3.11313 5.37022 3.47874 4.38219L3.82795 3.43848Z" fill="url(#wg2)"/>
-                <defs>
-                  <linearGradient id="wg1" x1="3.23" y1="15.38" x2="21.2" y2="3.46" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#5498FF"/><stop offset="0.33" stopColor="#7C74FF"/><stop offset="0.67" stopColor="#F16F9E"/><stop offset="1" stopColor="#FFD98E"/>
-                  </linearGradient>
-                  <linearGradient id="wg2" x1="-4.26" y1="12.04" x2="1.93" y2="2.22" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#FFC047"/><stop offset="0.33" stopColor="#F16F9E"/><stop offset="0.47" stopColor="#5498FF"/><stop offset="1" stopColor="#7C74FF"/>
-                  </linearGradient>
-                </defs>
-              </svg>
+              <img src="https://r2.airmole.cn/i/2026/10/11/mfp405-wxcv.jpg" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {isZh ? '你好，我是 ' : 'Hey, This is '}<span className="bg-gradient-to-r from-indigo-500 via-pink-400 to-amber-400 bg-clip-text text-transparent">{isZh ? 'AI 助手' : config.name}</span>
+              {isZh ? '你好，我是 ' : 'Hey, This is '}<span className="bg-gradient-to-r from-indigo-500 via-pink-400 to-amber-400 bg-clip-text text-transparent">{isZh ? 'AI 狄仁杰' : config.name}</span>
             </h3>
             <p className="text-xs text-gray-400 mb-4 max-w-[320px] leading-relaxed">
               {isZh
-                ? '可嵌入任何网站的 AI 助手，一行代码添加聊天 Widget，自动理解页面内容，支持实时查询后端 API。'
+                ? '在下姓狄，名仁杰，并州人士，官 同凤阁鸾台平章事、加黜置使、兼幽州大都督，奉旨钦差提调幽州一切军政要务！'
                 : 'Embeddable AI assistant for any website. One line of code to add a chat widget that understands page content and queries your backend APIs.'}
             </p>
 
