@@ -38,11 +38,14 @@ let _configLoaded = false;
 async function loadConfig(): Promise<AssistantConfig> {
   if (_configLoaded) return _configCache || {};
   _configLoaded = true;
+  const configPath = resolve(process.cwd(), 'ai-chat-assistant.config.json');
   try {
-    const content = await readFile(resolve(process.cwd(), 'ai-chat-assistant.config.json'), 'utf-8');
+    const content = await readFile(configPath, 'utf-8');
     _configCache = JSON.parse(content);
     logger.log(`[config] loaded ai-chat-assistant.config.json`);
-  } catch {
+  } catch (err: any) {
+    // A malformed config must not silently fall back to defaults — surface it.
+    logger.error(`[config] failed to load ${configPath}: ${err?.message || err}`);
     _configCache = {};
   }
   return _configCache || {};

@@ -7,10 +7,15 @@ let _cache: any = null;
 export async function GET() {
   if (!_cache) {
     let config: any = {};
+    const configPath = resolve(process.cwd(), 'ai-chat-assistant.config.json');
     try {
-      const content = await readFile(resolve(process.cwd(), 'ai-chat-assistant.config.json'), 'utf-8');
+      const content = await readFile(configPath, 'utf-8');
       config = JSON.parse(content);
-    } catch {}
+    } catch (err: any) {
+      // Don't silently swallow a malformed config — it would look like the
+      // config "isn't taking effect" with no clue why.
+      console.error(`[config] failed to load ${configPath}: ${err?.message || err}`);
+    }
 
     let suggestedQuestions = config.suggestedQuestions || [];
 
