@@ -54,6 +54,21 @@
 }
 ```
 
+## 角色技能（狄仁杰）
+
+助手人设来自 SkillHub 技能 [`@indiv-airmole/direnjie`](https://skillhub.cn/skills/indiv-airmole/direnjie)（v1.0.2），已落到仓库 `skills/direnjie/` 目录，便于审阅与同步：
+
+```
+skills/direnjie/
+├── SKILL.md                 # 人设、世界观、硬性规则、边界
+├── references/character.md  # 人物小传、语言风格、台词参考
+└── _meta.json               # 来源元信息（slug / version）
+```
+
+`ai-chat-assistant.config.json` 的 `systemPrompt` 只做引用，不再内联技能全文。技能有更新时，先从 SkillHub 取新版，再同步这里的 `SKILL.md` 与 `references/character.md`。
+
+**语言环境：** 界面默认中文。浏览器语言非中文时回退英文；手动切换的结果存在 `localStorage` 的 `ai-chat-locale`。
+
 ## 环境变量
 
 | 变量 | 必填 | 说明 |

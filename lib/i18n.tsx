@@ -35,23 +35,35 @@ const I18nContext = createContext<{
   t: (key: TKey) => string;
   toggle: () => void;
 }>({
-  locale: 'en',
+  locale: 'zh',
   t: (k) => k,
   toggle: () => {},
 });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  // Start with 'en' to match SSR; detect browser locale after mount.
-  const [locale, setLocale] = useState<Locale>('en');
+  // Default to Chinese; only switch away for explicitly non-Chinese browsers.
+  // A stored preference (set by toggle) wins over both.
+  const [locale, setLocale] = useState<Locale>('zh');
 
   useEffect(() => {
-    if (navigator.language.startsWith('zh')) {
-      setLocale('zh');
+    const stored = localStorage.getItem('ai-chat-locale');
+    if (stored === 'en' || stored === 'zh') {
+      setLocale(stored);
+      return;
+    }
+    if (!navigator.language?.startsWith('zh')) {
+      setLocale('en');
     }
   }, []);
 
   const t = useCallback((key: TKey) => translations[locale][key] || key, [locale]);
-  const toggle = useCallback(() => setLocale((l) => (l === 'en' ? 'zh' : 'en')), []);
+  const toggle = useCallback(() => {
+    setLocale((l) => {
+      const next = l === 'en' ? 'zh' : 'en';
+      localStorage.setItem('ai-chat-locale', next);
+      return next;
+    });
+  }, []);
 
   return (
     <I18nContext.Provider value={{ locale, t, toggle }}>
