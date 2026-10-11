@@ -5,6 +5,30 @@ import { marked } from 'marked';
 
 marked.setOptions({ gfm: true, breaks: true });
 
+/* 顶部栏外链：技能与电子书 */
+const NAV_LINKS = [
+  {
+    href: 'https://skillhub.cn/skills/indiv-airmole/direnjie',
+    zh: '狄仁杰 SKILL',
+    en: 'Skill',
+    icon: (
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2l2.4 5.3 5.6.7-4.2 3.9 1.1 5.7L12 14.9 7.1 17.6l1.1-5.7L4 8l5.6-.7L12 2z" fill="currentColor" fillOpacity="0.85" />
+      </svg>
+    ),
+  },
+  {
+    href: 'https://direnjie.airmole.cn',
+    zh: '神探狄仁杰',
+    en: 'Novel',
+    icon: (
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 3h9a3 3 0 0 1 3 3v15H8a3 3 0 0 1-3-3V3zm2 2v13a1 1 0 0 0 1 1h7V6a1 1 0 0 0-1-1H7z" fill="currentColor" fillOpacity="0.85" />
+      </svg>
+    ),
+  },
+];
+
 interface Message {
   id: string;
   role: 'user' | 'assistant';
@@ -245,6 +269,21 @@ export default function ChatPanel({ mode = 'full' }: { mode?: 'full' | 'widget' 
           </div>
         </div>
         <div className="flex items-center gap-1.5">
+          <nav className="mr-0.5 hidden items-center gap-1.5 sm:flex">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={link.zh}
+                className="group inline-flex items-center gap-1 rounded-md border border-[var(--line-soft)] bg-[rgba(255,253,247,0.6)] px-2 py-1.5 text-[11px] font-serif text-ink-soft transition hover:border-[rgba(156,43,33,0.35)] hover:bg-[rgba(156,43,33,0.045)] hover:text-cinnabar"
+              >
+                <span className="text-gold transition group-hover:text-cinnabar">{link.icon}</span>
+                <span className="hidden md:inline">{isZh ? link.zh : link.en}</span>
+              </a>
+            ))}
+          </nav>
           {messages.length > 0 && (
             <button
               onClick={clearChat}
