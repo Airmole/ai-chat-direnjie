@@ -9,7 +9,7 @@
  *   <script src="https://your-ai-chat-assistant.edgeone.app/embed.js" async></script>
  *
  * Options (data-* attributes):
- *   data-color    — Accent color (default: #6366f1)
+ *   data-color    — Accent color (default: #9c2b21, 朱砂)
  *   data-position — "bottom-right" (default) or "bottom-left"
  */
 (function () {
@@ -31,7 +31,7 @@
   }
   if (!origin) return;
 
-  var color = (script && script.getAttribute('data-color')) || '#6366f1';
+  var color = (script && script.getAttribute('data-color')) || '#9c2b21';
   var position = (script && script.getAttribute('data-position')) || 'bottom-right';
   var isLeft = position === 'bottom-left';
   var side = isLeft ? 'left' : 'right';
@@ -51,26 +51,32 @@
   var css = document.createElement('style');
   css.textContent =
     '#__aa-bubble{position:fixed;bottom:24px;' + side + ':24px;z-index:2147483647;' +
-    'width:60px;height:60px;border-radius:50%;' +
-    'background:linear-gradient(135deg,' + color + ',' + color + 'dd);' +
+    'width:56px;height:56px;border-radius:4px;' +
+    'background:linear-gradient(150deg,' + color + ',' + color + 'dd);' +
     'cursor:pointer;border:none;outline:none;' +
-    'box-shadow:0 8px 24px ' + color + '44,0 2px 8px rgba(0,0,0,.1);' +
+    'box-shadow:0 6px 18px ' + color + '3d,inset 0 0 0 1px rgba(253,248,238,.35);' +
     'display:flex;align-items:center;justify-content:center;' +
     'transition:all .3s cubic-bezier(.4,0,.2,1)}' +
-    '#__aa-bubble:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 12px 32px ' + color + '55,0 4px 12px rgba(0,0,0,.15)}' +
-    '#__aa-bubble:active{transform:scale(.95)}' +
-    '#__aa-bubble svg{width:28px;height:28px;fill:#fff;transition:transform .3s}' +
-    '#__aa-frame{position:fixed;bottom:100px;' + side + ':24px;z-index:2147483647;' +
+    // 回字纹压印在印面内，比皂面略亮，仅作肌理
+    '#__aa-bubble::after{content:"";position:absolute;inset:5px;border-radius:2px;' +
+    'border:1px solid rgba(253,248,238,.28);pointer-events:none}' +
+    '#__aa-bubble:hover{transform:translateY(-2px);box-shadow:0 10px 26px ' + color + '4d,inset 0 0 0 1px rgba(253,248,238,.45)}' +
+    '#__aa-bubble:active{transform:translateY(0)}' +
+    '#__aa-bubble svg{width:26px;height:26px;fill:#fdf8ee;transition:transform .3s}' +
+    '#__aa-frame{position:fixed;bottom:96px;' + side + ':24px;z-index:2147483647;' +
     'width:420px;height:640px;max-height:calc(100vh - 120px);max-width:calc(100vw - 48px);' +
-    'border:none;border-radius:20px;' +
-    'box-shadow:0 24px 64px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04);' +
-    'opacity:0;transform:translateY(12px) scale(.97);' +
+    'border:none;border-radius:10px;' +
+    // 宣纸底色 + 淡墨描边，像一册摊开的经卷
+    'box-shadow:0 18px 48px rgba(43,38,33,.16),0 4px 14px rgba(43,38,33,.08),0 0 0 1px rgba(122,100,66,.22);' +
+    'opacity:0;transform:translateY(12px) scale(.98);' +
     'transition:opacity .3s cubic-bezier(.4,0,.2,1),transform .3s cubic-bezier(.4,0,.2,1);' +
-    'pointer-events:none;background:#fff;overflow:hidden}' +
+    'pointer-events:none;background:#f6f0e2;overflow:hidden}' +
     '#__aa-frame.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}' +
     '@media(max-width:480px){#__aa-frame{width:100vw;height:100vh;max-height:100vh;' +
     'bottom:0;' + side + ':0;border-radius:0}}';
   document.head.appendChild(css);
+
+
 
   // ─── Bubble ──────────────────────────────────────────────────────────────
   var bubble = document.createElement('button');
